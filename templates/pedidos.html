@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>.</h1>
+<div class="row g-8">
+  <div class="py-9 text-center">
+    <h3 class="mb-3">Restaurant</h3>
+    <div class="col-lg-6 mx-auto">
+        <p class="lead mb-4">nomina de pedidos de restaurant</p>
+    </div>   
+  </div>
+
+  <div class="col-2"></div>
+  {% if pedido %}
+  <div class="col-8">
+    <div class="card top-selling overflow-auto">
+      <div class="card-body pb-0">
+        <h5 class="card-title">Lista de Pedidos <span>| Todos</span></h5>
+        <table class="table table-sm">
+          <thead class="table">
+            <tr>
+              <th scope="col" style="text-transform: uppercase;">Id</th>
+              <th scope="col" style="text-transform: uppercase;">Imagen</th>
+              <th scope="col" style="text-transform: uppercase;">Plato</th>
+              <th scope="col" style="text-transform: uppercase;">Precio</th>
+              <th scope="col" style="text-transform: uppercase;">Total</th>
+              <th scope="col" style="text-transform: uppercase;">Mesa</th>
+              <th scope="col" style="text-transform: uppercase;">Cantidad</th>
+              <th scope="col" style="text-transform: uppercase;">Cliente</th>
+              <th scope="col" style="text-transform: uppercase;">Fecha</th>
+          </thead>
+          <tbody class="table-group-divider">
+            {% for item in pedido %}
+            <tr>
+              <td>{{ item.0 }}</td>
+              <th scope="row"><a href="#"><img src="static/img/menu/{{ item.3 }}" class="rounded-circle" width="60" height="40"></a></th>
+              <td class="text-primary fw-bold">{{ item.1 }}</td>
+              <td>${{ item.2 }}</td>
+              <td>${{ item.2 * item.5 }}</td>
+              <td>Mesa - {{ item.4 }}</td>
+              <td>{{ item.5 }} {% if item.5 > 1%} platos {% else %} plato {% endif %} </td>
+              <td class="text fw-bold">{{ item.6 }}</td>
+              <td>{{ item.7 }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="overflow-hidden col-lg-8 mx-auto">
+      <div class="alert alert-success" role="alert">
+          <p>Lista vacia, agregar registro por favor.</p>
+      </div>
+  </div>
+  {% endif %} 
+  <div class="col-2"></div>
+    
+</div>
+{% endblock %}
